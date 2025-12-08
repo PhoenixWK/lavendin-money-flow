@@ -1,16 +1,13 @@
-# Lavendin Money Flow
+# Lavendin Money Flow - Frontend
 
-A financial management application with frontend and backend components.
+Frontend application for the Lavendin Money Flow financial management application.
+
+**Branch: frontend** - This branch contains only the frontend code.
 
 ## Project Structure
 
-- `frontend/` - Frontend application
-- `backend/` - Backend API and services
+- `frontend/` - Frontend application (Next.js)
 
 ## Getting Started
 
-### Backend
-Navigate to the backend directory and follow the setup instructions.
-
-### Frontend
 Navigate to the frontend directory and follow the setup instructions.
