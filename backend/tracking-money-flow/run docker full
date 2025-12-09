@@ -1,0 +1,9 @@
+- Run Docker full: docker compose up --build
+
+- Docker Maven Wrapper
+.\mvn-docker.cmd clean package
+.\mvn-docker.cmd spring-boot:run
+
+- Traditional Maven Wrapper
+.\mvnw.cmd clean package
+.\mvnw.cmd spring-boot:run

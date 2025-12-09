@@ -21,8 +21,10 @@ public class JwtTokenProvider implements TokenProvider {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + EXPIRATION_TIME);
 
+        String subject = user.getId() != null ? user.getId().value() : user.getEmail().value();
+
         return Jwts.builder()
-                .setSubject(user.getId().toString())
+                .setSubject(subject)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(key, SignatureAlgorithm.HS256)

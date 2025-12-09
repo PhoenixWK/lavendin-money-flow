@@ -2,11 +2,9 @@
 services:
   tracking-money-flow:
     container_name: tracking-money-flow-dev
-    image: eclipse-temurin:21-jre
-    working_dir: /app
-    volumes:
-      - ./target/tracking-money-flow-0.0.1-SNAPSHOT.jar:/app/app.jar
-    command: ["java", "-jar", "app.jar"]
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     ports:
       - "8080:8080"
     env_file:

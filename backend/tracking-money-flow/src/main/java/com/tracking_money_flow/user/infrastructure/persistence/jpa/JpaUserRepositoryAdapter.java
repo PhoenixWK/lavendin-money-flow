@@ -19,7 +19,16 @@ public class JpaUserRepositoryAdapter implements UserRepository {
 
     @Override
     public void save(User user) {
-        userJpaRepository.save(UserMapper.toEntity(user));
+        UserJpaEntity entity = UserMapper.toEntity(user);
+
+        if (user.isNew()) {
+            // For new users, use persist to let JPA generate the ID
+            userJpaRepository.save(entity);
+        } else {
+            // For existing users, set the ID and use merge
+            entity.setId(user.getId().value());
+            userJpaRepository.save(entity);
+        }
     }
 
     @Override
