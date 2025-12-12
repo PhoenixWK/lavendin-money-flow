@@ -1,59 +1,37 @@
 import { ChevronRight } from "lucide-react";
-import { useLanguage } from "@/hooks/useLanguage";
 
 export default function HeroSection() {
-  const { language } = useLanguage();
-
-  const content = {
-    en: {
-      headline: "Smart Personal Finance Management with Lavendin",
-      subtext:
-        "Track income and expenses, create budgets, set savings goals, and receive visual reports. All in one beautiful, simple interface.",
-      ctaPrimary: "Start Free",
-      ctaSecondary: "View Demo",
-    },
-    vi: {
-      headline: "Quản lý Tài chính Cá nhân Thông minh với Lavendin",
-      subtext:
-        "Theo dõi thu nhập và chi tiêu, tạo ngân sách, đặt mục tiêu tiết kiệm và nhận báo cáo trực quan. Tất cả trong một giao diện đơn giản và đẹp mắt.",
-      ctaPrimary: "Bắt Đầu Miễn Phí",
-      ctaSecondary: "Xem Demo",
-    },
-  };
-
-  const text = content[language as keyof typeof content] || content.en;
-
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-green-25 to-green-10 px-6 py-20">
       <div className="max-w-6xl w-full grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-8">
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
-            {text.headline}
+            Smart Personal Finance Management with Lavendin
           </h1>
 
           <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
-            {text.subtext}
+            Track income and expenses, create budgets, set savings goals, and receive visual reports. All in one beautiful, simple interface.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-6">
             <button className="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 group">
-              {text.ctaPrimary}
+              Start Free
               <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
 
             <button className="border-2 border-primary text-primary hover:bg-primary/5 px-8 py-4 rounded-xl font-semibold transition-all duration-300">
-              {text.ctaSecondary}
+              View Demo
             </button>
           </div>
 
           <div className="flex gap-6 pt-4 text-sm text-gray-600">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-primary rounded-full"></div>
-              {language === "en" ? "No credit card needed" : "Không cần thẻ tín dụng"}
+              No credit card needed
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-primary rounded-full"></div>
-              {language === "en" ? "Takes 2 minutes" : "Chỉ mất 2 phút"}
+              Takes 2 minutes
             </div>
           </div>
         </div>

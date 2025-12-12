@@ -1,10 +1,10 @@
-import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
-import FeaturesSection from "@/components/FeaturesSection";
-import HowItWorksSection from "@/components/HowItWorksSection";
-import PricingSection from "@/components/PricingSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import Footer from "@/components/Footer";
+import Header from "../modules/landing-page/components/Header";
+import HeroSection from "../modules/landing-page/components/HeroSection";
+import FeaturesSection from "../modules/landing-page/components/FeaturesSection";
+import HowItWorksSection from "../modules/landing-page/components/HowItWorksSection";
+import PricingSection from "../modules/landing-page/components/PricingSection";
+import TestimonialsSection from "../modules/landing-page/components/TestimonialsSection";
+import Footer from "../modules/landing-page/components/Footer";
 
 export default function Index() {
   return (

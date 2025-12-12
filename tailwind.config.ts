@@ -4,6 +4,7 @@ export default {
   darkMode: ["class"],
   content: [
     "./components/**/*.{ts,tsx}",
+    "./modules/**/*.{ts,tsx}",
     "./pages/**/*.{ts,tsx}",
     "./hooks/**/*.{ts,tsx}",
     "./lib/**/*.{ts,tsx}",
@@ -53,6 +54,12 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        green: {
+          "10": "#F0FDF4",
+          "25": "#DCFCE7",
+          "50": "#F0FDF4",
+          "100": "#DCFCE7",
         },
         purple: {
           "10": "#F5F2FF",
