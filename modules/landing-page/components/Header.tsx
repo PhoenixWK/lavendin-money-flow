@@ -112,34 +112,15 @@ const Header = () => {
 
                         {/* Mobile Navigation */}
                         <nav className="flex flex-col space-y-4">
-                            <a 
-                                href="#features" 
-                                className="text-black font-semibold hover:text-[#47EB98] transition-colors py-2"
-                                onClick={toggleMobileMenu}
-                            >
+                            <Link href="/features" className="text-black font-semibold hover:text-[#47EB98] transition-colors">
                                 Features
-                            </a>
-                            <a 
-                                href="#pricing" 
-                                className="text-black font-semibold hover:text-[#47EB98] transition-colors py-2"
-                                onClick={toggleMobileMenu}
-                            >
+                            </Link>
+                            <Link href="/pricing" className="text-black font-semibold hover:text-[#47EB98] transition-colors">
                                 Pricing
-                            </a>
-                            <a 
-                                href="#about" 
-                                className="text-black font-semibold hover:text-[#47EB98] transition-colors py-2"
-                                onClick={toggleMobileMenu}
-                            >
-                                About
-                            </a>
-                            <a 
-                                href="#contact" 
-                                className="text-black font-semibold hover:text-[#47EB98] transition-colors py-2"
-                                onClick={toggleMobileMenu}
-                            >
+                            </Link>
+                            <Link href="/contact" className="text-black font-semibold hover:text-[#47EB98] transition-colors">
                                 Contact
-                            </a>
+                            </Link>
                         </nav>
 
                         {/* Mobile Auth Links */}
