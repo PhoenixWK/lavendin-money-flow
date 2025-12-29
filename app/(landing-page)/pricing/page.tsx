@@ -1,4 +1,4 @@
-import { Header, PricingPage, Footer } from '../../../modules/landing-page/components';
+import { Header, PricingPage, Footer } from '../../../modules/landing-page/components/home';
 
 export default function PricingPageRoute() {
   return (

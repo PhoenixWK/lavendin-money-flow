@@ -147,7 +147,7 @@ const PricingComparison = () => {
                   <div className="space-y-2">
                     <div className="text-lg text-black font-semibold">Basic</div>
                     <div className="text-2xl text-black font-bold">$9.99</div>
-                    <button className="bg-green-100 hover:bg-green-200 text-green-800 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    <button className="bg-[#F4FBF2] border-2 border-[#9CDD8A] hover:bg-[#9CDD8A] text-black font-semibold px-4 py-2 rounded-lg text-sm transition-colors">
                       Get Started
                     </button>
                   </div>
@@ -156,7 +156,7 @@ const PricingComparison = () => {
                   <div className="space-y-2">
                     <div className="text-lg text-black font-semibold">Pro ⭐</div>
                     <div className="text-2xl text-black font-bold">$29.99</div>
-                    <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    <button className="bg-[#F4FBF2] border-2 border-[#9CDD8A] hover:bg-[#9CDD8A] text-black font-semibold px-4 py-2 rounded-lg text-sm transition-colors">
                       Get Started
                     </button>
                   </div>
@@ -165,7 +165,7 @@ const PricingComparison = () => {
                   <div className="space-y-2">
                     <div className="text-lg text-black font-semibold">Business</div>
                     <div className="text-2xl text-black font-bold">$79.99</div>
-                    <button className="bg-green-100 hover:bg-green-200 text-green-800 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    <button className="bg-[#F4FBF2] border-2 border-[#9CDD8A] hover:bg-[#9CDD8A] text-black font-semibold px-4 py-2 rounded-lg text-sm transition-colors">
                       Get Started
                     </button>
                   </div>
@@ -174,7 +174,7 @@ const PricingComparison = () => {
                   <div className="space-y-2">
                     <div className="text-lg text-black font-semibold">Enterprise</div>
                     <div className="text-2xl text-black font-bold">$199.99</div>
-                    <button className="border-2 border-gray-300 hover:border-gray-400 text-gray-700 hover:text-gray-900 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    <button className="bg-[#F4FBF2] border-2 border-[#9CDD8A] hover:bg-[#9CDD8A] text-black font-semibold px-4 py-2 rounded-lg text-sm transition-colors">
                       Contact Sales
                     </button>
                   </div>

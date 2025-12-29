@@ -92,7 +92,7 @@ const TestimonialsSection = () => {
               
               {/* Author info */}
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-emerald-500 text-white rounded-full flex items-center justify-center font-semibold">
+                <div className="w-10 h-10 bg-[#47EB98] text-white rounded-full flex items-center justify-center font-semibold">
                   {testimonial.avatar}
                 </div>
                 <div>

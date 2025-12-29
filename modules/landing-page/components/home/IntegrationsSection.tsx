@@ -27,7 +27,7 @@ const IntegrationsSection = () => {
             No credit card required. Experience the full power of our platform 
             with a completely free trial period.
           </p>
-          <button className="bg-[#37e28c] font-semibold text-black px-8 py-3 rounded-lg text-lg font-medium hover:bg-[#27a35a] transition-colors">
+          <button className="bg-[#37e28c] font-semibold text-black px-8 py-3 rounded-lg text-lg hover:bg-[#27a35a] transition-colors">
             Start Free Trial
           </button>
         </div>

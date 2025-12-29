@@ -40,7 +40,7 @@ const Footer = () => {
                 seamless integrations, and bank-level security.
               </p>
               
-              {/* Social links */}
+            
               <div className="flex space-x-4">
                 <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-emerald-600 transition-colors">
                   <span className="sr-only">Twitter</span>
@@ -63,8 +63,7 @@ const Footer = () => {
               </div>
             </div>
             
-            {/* Platform links */}
-            <div>
+            {/* <div>
               <h3 className="text-lg font-semibold mb-4">Platform</h3>
               <ul className="space-y-3">
                 {footerLinks.platform.map((link, index) => (
@@ -77,7 +76,7 @@ const Footer = () => {
               </ul>
             </div>
             
-            {/* Company links */}
+          
             <div>
               <h3 className="text-lg font-semibold mb-4">Company</h3>
               <ul className="space-y-3">
@@ -91,7 +90,7 @@ const Footer = () => {
               </ul>
             </div>
             
-            {/* Resources links */}
+          
             <div>
               <h3 className="text-lg font-semibold mb-4">Resources</h3>
               <ul className="space-y-3">
@@ -103,7 +102,7 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
           </div>
         </div>
         
