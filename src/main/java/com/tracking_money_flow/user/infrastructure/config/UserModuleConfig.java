@@ -4,7 +4,7 @@ import com.tracking_money_flow.user.application.port.PasswordHasher;
 import com.tracking_money_flow.user.application.port.TokenProvider;
 import com.tracking_money_flow.user.application.usecase.LoginUserUseCase;
 import com.tracking_money_flow.user.application.usecase.RegisterUserUseCase;
-import com.tracking_money_flow.user.domain.UserRepository;
+import com.tracking_money_flow.user.application.port.UserRepository;
 import com.tracking_money_flow.user.infrastructure.persistence.jpa.JpaUserRepositoryAdapter;
 import com.tracking_money_flow.user.infrastructure.persistence.jpa.UserJpaRepository;
 import com.tracking_money_flow.user.infrastructure.security.BCryptPasswordHasher;

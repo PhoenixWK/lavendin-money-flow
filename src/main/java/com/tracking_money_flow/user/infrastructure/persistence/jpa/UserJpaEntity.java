@@ -1,5 +1,6 @@
 package com.tracking_money_flow.user.infrastructure.persistence.jpa;
 
+import com.tracking_money_flow.user.domain.AuthProvider;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -29,6 +30,10 @@ public class UserJpaEntity {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
+    @Column(name = "provider")
+    @Enumerated(EnumType.STRING)
+    private AuthProvider authProvider;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
@@ -49,12 +54,13 @@ public class UserJpaEntity {
     public UserJpaEntity() {
     }
 
-    public UserJpaEntity(String id, String email, String username, String password, Date dateOfBirth, UserStatus status, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public UserJpaEntity(String id, String email, String username, String password, Date dateOfBirth, UserStatus status, AuthProvider authProvider, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
+        this.authProvider = authProvider;
         this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -122,5 +128,13 @@ public class UserJpaEntity {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public AuthProvider getAuthProvider() {
+        return authProvider;
+    }
+
+    public void setAuthProvider(AuthProvider authProvider) {
+        this.authProvider = authProvider;
     }
 }

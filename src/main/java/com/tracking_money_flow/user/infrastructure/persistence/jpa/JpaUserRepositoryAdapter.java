@@ -3,7 +3,7 @@ package com.tracking_money_flow.user.infrastructure.persistence.jpa;
 import com.tracking_money_flow.user.domain.Email;
 import com.tracking_money_flow.user.domain.User;
 import com.tracking_money_flow.user.domain.UserId;
-import com.tracking_money_flow.user.domain.UserRepository;
+import com.tracking_money_flow.user.application.port.UserRepository;
 import com.tracking_money_flow.user.infrastructure.persistence.mapper.UserMapper;
 
 
@@ -29,6 +29,11 @@ public class JpaUserRepositoryAdapter implements UserRepository {
             entity.setId(user.getId().value());
             userJpaRepository.save(entity);
         }
+    }
+
+    @Override
+    public User saveUserWithReturnValue(User newUser) {
+        return null;
     }
 
     @Override

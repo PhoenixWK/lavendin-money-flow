@@ -5,6 +5,7 @@ create table user (
     email varchar(255) not null unique,
     hashed_password varchar(255) default null,
     status enum('ACTIVE', 'INACTIVE', 'LOCKED') default 'ACTIVE',
+    provider varchar(255) default null,
     created_at timestamp default current_timestamp,
     updated_at timestamp on update current_timestamp
 );
