@@ -6,14 +6,17 @@ WORKDIR /app
 # Copy pom.xml first to leverage Docker layer caching
 COPY pom.xml .
 
-# Download dependencies
-RUN mvn dependency:go-offline -B
+# Copy .mvn folder for Maven wrapper settings
+COPY .mvn .mvn
+
+# Download dependencies with explicit repository settings for snapshots
+RUN mvn dependency:resolve -B --update-snapshots
 
 # Copy source code
 COPY src ./src
 
 # Build the application
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests -DskipTests=true --quiet
 
 # Runtime stage
 FROM eclipse-temurin:21-jre

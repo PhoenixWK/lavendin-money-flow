@@ -41,11 +41,11 @@ public class User {
 
     public static User registerWithGoogle(Email email) {
         return new User(
-                UserId.create(UserId.generate()),
+                null,  // Let JPA generate the ID
                 email,
-                null,
+                Password.hashed("NO_PASSWORD_123"),
                 new UserName(email.value().split("@")[0]),
-                new DateOfBirth("1970-01-01"),
+                new DateOfBirth("2000-1-01"),
                 AuthProvider.GOOGLE,
                 LocalDateTime.now(),
                 LocalDateTime.now()
@@ -96,6 +96,10 @@ public class User {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public AuthProvider getAuthProvider() {
+        return authProvider;
     }
 }
 

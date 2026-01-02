@@ -33,7 +33,9 @@ public class JpaUserRepositoryAdapter implements UserRepository {
 
     @Override
     public User saveUserWithReturnValue(User newUser) {
-        return null;
+        UserJpaEntity entity = UserMapper.toEntity(newUser);
+        UserJpaEntity savedEntity = userJpaRepository.save(entity);
+        return UserMapper.toDomain(savedEntity);
     }
 
     @Override

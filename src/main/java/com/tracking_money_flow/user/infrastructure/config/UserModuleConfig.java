@@ -2,6 +2,7 @@ package com.tracking_money_flow.user.infrastructure.config;
 
 import com.tracking_money_flow.user.application.port.PasswordHasher;
 import com.tracking_money_flow.user.application.port.TokenProvider;
+import com.tracking_money_flow.user.application.usecase.GoogleLoginUseCase;
 import com.tracking_money_flow.user.application.usecase.LoginUserUseCase;
 import com.tracking_money_flow.user.application.usecase.RegisterUserUseCase;
 import com.tracking_money_flow.user.application.port.UserRepository;
@@ -44,5 +45,13 @@ public class UserModuleConfig {
             TokenProvider token
     ) {
         return new LoginUserUseCase(repo, hasher, token);
+    }
+
+    @Bean
+    GoogleLoginUseCase googleLoginUseCase(
+            UserRepository repo,
+            TokenProvider token
+    ) {
+        return new GoogleLoginUseCase(repo, token);
     }
 }

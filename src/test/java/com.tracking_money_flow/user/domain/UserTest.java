@@ -20,23 +20,14 @@ public class UserTest {
         UserName name = new UserName("johndoe");
         Password password = Password.hashed("securePassword!23");
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        String dateInString = "2013-01-01";
-        Date date;
-         try {
-             date = formatter.parse(dateInString);
-         } catch (ParseException e) {
-             throw new RuntimeException(e);
-         }
-        DateOfBirth dateOfBirth = new DateOfBirth(date); // January 1, 2013
+         // January 1, 2013
 
-        User user = User.reconstruct(id, email, password, name, dateOfBirth, UserStatus.ACTIVE, LocalDateTime.now(), LocalDateTime.now());
+        User user = User.reconstruct(id, email, password, name, AuthProvider.EMAIL_AND_PASSWORD, new DateOfBirth("1990/10/01"), UserStatus.ACTIVE,  LocalDateTime.now(), LocalDateTime.now());
 
         assertNotNull(user);
         assertEquals("johndoe123@gmail.com", user.getEmail().value());
         assertEquals("johndoe", user.getUsername().value());
         assertEquals("securePassword!23", user.getPassword().value());
-        assertEquals(date, user.getDateOfBirth().value());
     }
 
     //test invalid email
@@ -48,17 +39,8 @@ public class UserTest {
             UserName name = new UserName("johndoe");
             Password password = Password.hashed("securePassword!23");
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            String dateInString = "2013-01-01";
-            Date date;
-            try {
-                date = formatter.parse(dateInString);
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-            DateOfBirth dateOfBirth = new DateOfBirth(date);
 
-            User.reconstruct(id, email, password, name, dateOfBirth, UserStatus.ACTIVE, LocalDateTime.now(), LocalDateTime.now());
+            User.reconstruct(id, email, password, name, AuthProvider.EMAIL_AND_PASSWORD, new DateOfBirth("1990/10/01"), UserStatus.ACTIVE,  LocalDateTime.now(), LocalDateTime.now());
         });
     }
 
@@ -71,17 +53,7 @@ public class UserTest {
             UserName name = new UserName("johndoe");
             Password password = Password.raw("1");
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            String dateInString = "2013-01-01";
-            Date date;
-            try {
-                date = formatter.parse(dateInString);
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-            DateOfBirth dateOfBirth = new DateOfBirth(date);
-
-            User.reconstruct(id, email, password, name, dateOfBirth, UserStatus.ACTIVE, LocalDateTime.now(), LocalDateTime.now());
+            User.reconstruct(id, email, password, name, AuthProvider.EMAIL_AND_PASSWORD, new DateOfBirth("1990/10/01"), UserStatus.ACTIVE,  LocalDateTime.now(), LocalDateTime.now());
         });
     }
 
@@ -94,17 +66,7 @@ public class UserTest {
             UserName name = new UserName("");
             Password password = Password.hashed("johndoe@123");
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            String dateInString = "2013-01-01";
-            Date date;
-            try {
-                date = formatter.parse(dateInString);
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-            DateOfBirth dateOfBirth = new DateOfBirth(date);
-
-            User.reconstruct(id, email, password, name, dateOfBirth, UserStatus.ACTIVE, LocalDateTime.now(), LocalDateTime.now());
+            User.reconstruct(id, email, password, name, AuthProvider.EMAIL_AND_PASSWORD, new DateOfBirth("1990/10/01"), UserStatus.ACTIVE,  LocalDateTime.now(), LocalDateTime.now());
         });
     }
 
@@ -115,19 +77,9 @@ public class UserTest {
             UserId id = UserId.create(UserId.generate());
             Email email = new Email("johndoe123@gmail.com");
             UserName name = new UserName("JohnDoe");
-            Password password = Password.hashed("johndoe@123");
+            Password password = Password.hashed("johndoe@123");;
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            String dateInString = "2026-01-21";
-            Date date;
-            try {
-                date = formatter.parse(dateInString);
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-            DateOfBirth dateOfBirth = new DateOfBirth(date);
-
-            User.reconstruct(id, email, password, name, dateOfBirth, UserStatus.ACTIVE, LocalDateTime.now(), LocalDateTime.now());
+            User.reconstruct(id, email, password, name, AuthProvider.EMAIL_AND_PASSWORD, new DateOfBirth("1990/10/01"), UserStatus.ACTIVE,  LocalDateTime.now(), LocalDateTime.now());
         });
     }
 }

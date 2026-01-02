@@ -5,7 +5,10 @@ import com.tracking_money_flow.user.domain.*;
 import com.tracking_money_flow.user.infrastructure.persistence.jpa.UserJpaEntity;
 import com.tracking_money_flow.user.infrastructure.persistence.jpa.UserStatus;
 
+
 public class UserMapper {
+
+
     public static UserJpaEntity toEntity(User user) {
         UserJpaEntity entity = new UserJpaEntity();
         // Don't set ID for new entities - let Hibernate generate it
@@ -18,6 +21,7 @@ public class UserMapper {
         entity.setPassword(user.getPassword().value());
         entity.setDateOfBirth(user.getDateOfBirth().value());
         entity.setStatus(mapToJpaStatus(user.getStatus()));
+        entity.setAuthProvider(user.getAuthProvider());
 
         // Only set timestamps for existing entities - new entities will use @PrePersist
         if (!user.isNew()) {
@@ -42,7 +46,8 @@ public class UserMapper {
                 new Email(entity.getEmail()),
                 Password.hashed(entity.getPassword()),
                 new UserName(entity.getUsername()),
-                new DateOfBirth(entity.getDateOfBirth()),
+                entity.getAuthProvider(),
+                new DateOfBirth(entity.getDateOfBirth().toString()),
                 mapToDomainStatus(entity.getStatus()),
                 entity.getCreatedAt(),
                 entity.getUpdatedAt()
