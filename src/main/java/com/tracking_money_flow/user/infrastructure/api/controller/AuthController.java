@@ -1,14 +1,18 @@
-package com.tracking_money_flow.user.api.controller;
+package com.tracking_money_flow.user.infrastructure.api.controller;
 
-import com.tracking_money_flow.user.api.dto.GoogleUserInfo;
-import com.tracking_money_flow.user.api.dto.LoginRequest;
-import com.tracking_money_flow.user.api.dto.RegisterUserRequest;
+import com.tracking_money_flow.user.application.command.PasswordRecoveryCommand;
+import com.tracking_money_flow.user.application.service.AuthService;
+import com.tracking_money_flow.user.infrastructure.api.dto.GoogleUserInfo;
+import com.tracking_money_flow.user.infrastructure.api.dto.LoginRequest;
+import com.tracking_money_flow.user.infrastructure.api.dto.PasswordRecoveryRequest;
+import com.tracking_money_flow.user.infrastructure.api.dto.RegisterUserRequest;
 import com.tracking_money_flow.user.application.command.GoogleLoginCommand;
 import com.tracking_money_flow.user.application.command.LoginCommand;
 import com.tracking_money_flow.user.application.command.RegisterUserCommand;
 import com.tracking_money_flow.user.application.usecase.GoogleLoginUseCase;
 import com.tracking_money_flow.user.application.usecase.LoginUserUseCase;
 import com.tracking_money_flow.user.application.usecase.RegisterUserUseCase;
+import com.tracking_money_flow.user.infrastructure.persistence.adapter.EmailSendingAdapter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,17 +22,12 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthController {
 
-    private final RegisterUserUseCase registerUserUseCase;
-    private final LoginUserUseCase loginUserUseCase;
-    private final GoogleLoginUseCase googleLoginUseCase;
+    private final AuthService authService;
+
 
     public AuthController(
-            RegisterUserUseCase registerUserUseCase,
-            LoginUserUseCase loginUserUseCase,
-            GoogleLoginUseCase googleLoginUseCase) {
-        this.loginUserUseCase = loginUserUseCase;
-        this.registerUserUseCase = registerUserUseCase;
-        this.googleLoginUseCase = googleLoginUseCase;
+            AuthService authService) {
+        this.authService = authService;
     }
 
     @PostMapping("/register")
@@ -43,7 +42,7 @@ public class AuthController {
                         request.dateOfBirth()
                 );
 
-        registerUserUseCase.execute(cmd);
+        authService.register(cmd);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -53,7 +52,7 @@ public class AuthController {
             @RequestBody LoginRequest request
     ) {
         LoginCommand command = new LoginCommand(request.email(), request.password());
-        String token = loginUserUseCase.execute(command);
+        String token = authService.login(command);
         return ResponseEntity.ok(token);
     }
 
@@ -62,7 +61,16 @@ public class AuthController {
             @RequestBody GoogleUserInfo googleUserInfo
     ) {
         GoogleLoginCommand command = new GoogleLoginCommand(googleUserInfo.email(), googleUserInfo.name());
-        String token = googleLoginUseCase.execute(command);
+        String token = authService.loginWithGoogle(command);
         return ResponseEntity.ok(token);
+    }
+
+    @PostMapping("/me/password-recovery-request")
+    public ResponseEntity<?> recoverPassword(
+            @RequestBody PasswordRecoveryRequest request
+    ) {
+        PasswordRecoveryCommand cmd = new PasswordRecoveryCommand(request.email());
+        authService.passwordRecovery(cmd);
+        return ResponseEntity.ok().build();
     }
 }

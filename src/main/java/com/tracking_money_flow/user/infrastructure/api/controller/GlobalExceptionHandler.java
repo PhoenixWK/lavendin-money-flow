@@ -1,5 +1,6 @@
-package com.tracking_money_flow.user.api.controller;
+package com.tracking_money_flow.user.infrastructure.api.controller;
 
+import jakarta.mail.MessagingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
@@ -42,5 +43,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> handleException(Exception e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(Map.of("error", "An unexpected error occurred: " + e.getMessage()));
+    }
+
+    @ExceptionHandler(MessagingException.class)
+    public ResponseEntity<Map<String, String>> handleEmailSendingException(Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Map.of("error", "Failed to send email: " + e.getMessage()));
     }
 }

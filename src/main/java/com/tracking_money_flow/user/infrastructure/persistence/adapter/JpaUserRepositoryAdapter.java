@@ -1,9 +1,11 @@
-package com.tracking_money_flow.user.infrastructure.persistence.jpa;
+package com.tracking_money_flow.user.infrastructure.persistence.adapter;
 
 import com.tracking_money_flow.user.domain.Email;
 import com.tracking_money_flow.user.domain.User;
 import com.tracking_money_flow.user.domain.UserId;
 import com.tracking_money_flow.user.application.port.UserRepository;
+import com.tracking_money_flow.user.infrastructure.persistence.jpa.UserJpaEntity;
+import com.tracking_money_flow.user.infrastructure.persistence.jpa.UserJpaRepository;
 import com.tracking_money_flow.user.infrastructure.persistence.mapper.UserMapper;
 
 
