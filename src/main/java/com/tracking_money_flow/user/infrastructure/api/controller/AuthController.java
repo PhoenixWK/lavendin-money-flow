@@ -1,6 +1,6 @@
 package com.tracking_money_flow.user.infrastructure.api.controller;
 
-import com.tracking_money_flow.user.application.command.PasswordRecoveryCommand;
+import com.tracking_money_flow.user.application.command.PasswordRecoveryRequestCommand;
 import com.tracking_money_flow.user.application.service.AuthService;
 import com.tracking_money_flow.user.infrastructure.api.dto.GoogleUserInfo;
 import com.tracking_money_flow.user.infrastructure.api.dto.LoginRequest;
@@ -9,10 +9,6 @@ import com.tracking_money_flow.user.infrastructure.api.dto.RegisterUserRequest;
 import com.tracking_money_flow.user.application.command.GoogleLoginCommand;
 import com.tracking_money_flow.user.application.command.LoginCommand;
 import com.tracking_money_flow.user.application.command.RegisterUserCommand;
-import com.tracking_money_flow.user.application.usecase.GoogleLoginUseCase;
-import com.tracking_money_flow.user.application.usecase.LoginUserUseCase;
-import com.tracking_money_flow.user.application.usecase.RegisterUserUseCase;
-import com.tracking_money_flow.user.infrastructure.persistence.adapter.EmailSendingAdapter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,11 +62,11 @@ public class AuthController {
     }
 
     @PostMapping("/me/password-recovery-request")
-    public ResponseEntity<?> recoverPassword(
+    public ResponseEntity<?> recoverPasswordRequest(
             @RequestBody PasswordRecoveryRequest request
     ) {
-        PasswordRecoveryCommand cmd = new PasswordRecoveryCommand(request.email());
-        authService.passwordRecovery(cmd);
+        PasswordRecoveryRequestCommand cmd = new PasswordRecoveryRequestCommand(request.email());
+        authService.passwordRecoveryRequest(cmd);
         return ResponseEntity.ok().build();
     }
 }

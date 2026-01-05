@@ -1,5 +1,6 @@
-package com.tracking_money_flow.user.infrastructure.persistence.jpa;
+package com.tracking_money_flow.user.infrastructure.persistence.repository;
 
+import com.tracking_money_flow.user.infrastructure.persistence.jpa.UserJpaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

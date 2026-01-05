@@ -1,19 +1,16 @@
 package com.tracking_money_flow.user.infrastructure.config;
 
-import com.tracking_money_flow.user.application.port.EmailSending;
-import com.tracking_money_flow.user.application.port.PasswordHasher;
-import com.tracking_money_flow.user.application.port.TokenProvider;
+import com.tracking_money_flow.user.application.port.*;
 import com.tracking_money_flow.user.application.service.AuthService;
-import com.tracking_money_flow.user.application.usecase.GoogleLoginUseCase;
-import com.tracking_money_flow.user.application.usecase.LoginUserUseCase;
-import com.tracking_money_flow.user.application.usecase.PasswordRecoveryUseCase;
-import com.tracking_money_flow.user.application.usecase.RegisterUserUseCase;
-import com.tracking_money_flow.user.application.port.UserRepository;
+import com.tracking_money_flow.user.application.usecase.*;
 import com.tracking_money_flow.user.infrastructure.persistence.adapter.EmailSendingAdapter;
 import com.tracking_money_flow.user.infrastructure.persistence.adapter.JpaUserRepositoryAdapter;
-import com.tracking_money_flow.user.infrastructure.persistence.jpa.UserJpaRepository;
+import com.tracking_money_flow.user.infrastructure.persistence.adapter.PasswordRecoveryRepositoryAdapter;
+import com.tracking_money_flow.user.infrastructure.persistence.repository.PasswordRecoveryJpaRepository;
+import com.tracking_money_flow.user.infrastructure.persistence.repository.UserJpaRepository;
 import com.tracking_money_flow.user.infrastructure.security.BCryptPasswordHasher;
 import com.tracking_money_flow.user.infrastructure.security.JwtTokenProvider;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -24,6 +21,11 @@ public class UserModuleConfig {
     @Bean
     UserRepository userRepository(UserJpaRepository jpa) {
         return new JpaUserRepositoryAdapter(jpa);
+    }
+
+    @Bean("passwordRecoveryRepository")
+    PasswordRecoveryRepository passwordRecoveryRepository(PasswordRecoveryRepositoryAdapter adapter) {
+        return adapter;
     }
 
     @Bean
@@ -62,6 +64,15 @@ public class UserModuleConfig {
     }
 
     @Bean
+    PasswordRecoveryUseCase passwordRecoveryUseCase(
+            UserRepository userRepo,
+            PasswordHasher hasher,
+            @Qualifier("passwordRecoveryRepository") PasswordRecoveryRepository passwordRecoveryRepo
+    ) {
+        return new PasswordRecoveryUseCase(hasher, userRepo, passwordRecoveryRepo);
+    }
+
+    @Bean
     EmailSending emailSending(
             JavaMailSender mailSender,
             TemplateEngine templateEngine
@@ -70,24 +81,27 @@ public class UserModuleConfig {
     }
 
     @Bean
-    PasswordRecoveryUseCase passwordRecoveryUseCase(
-            EmailSending emailSending
+    PasswordRecoveryRequestUseCase passwordRecoveryRequestUseCase(
+            EmailSending emailSending,
+            @Qualifier("passwordRecoveryRepository") PasswordRecoveryRepository repo
     ) {
-        return new PasswordRecoveryUseCase(emailSending);
+        return new PasswordRecoveryRequestUseCase(emailSending, repo);
     }
 
     @Bean
     AuthService authService(
             LoginUserUseCase loginUserUseCase,
             RegisterUserUseCase registerUserUseCase,
-            PasswordRecoveryUseCase passwordRecoveryUseCase,
-            GoogleLoginUseCase googleLoginUseCase
+            PasswordRecoveryRequestUseCase passwordRecoveryRequestUseCase,
+            GoogleLoginUseCase googleLoginUseCase,
+            PasswordRecoveryUseCase passwordRecoveryUseCase
     ) {
         return new AuthService(
                 loginUserUseCase,
                 registerUserUseCase,
-                passwordRecoveryUseCase,
-                googleLoginUseCase
+                passwordRecoveryRequestUseCase,
+                googleLoginUseCase,
+                passwordRecoveryUseCase
         );
     }
 }

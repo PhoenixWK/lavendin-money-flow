@@ -40,7 +40,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/users/register",
                                 "/api/users/login",
-                                "/api/users/me/recover-password/**",
+                                "/api/users/me/password-recovery-request",
+                                "/api/users/me/password-recovery",
                                 "/api/users/google/login",
                                 "/api/users/google/callback",
                                 "/error",

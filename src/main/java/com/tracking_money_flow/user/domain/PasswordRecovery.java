@@ -1,16 +1,19 @@
 package com.tracking_money_flow.user.domain;
 
+import com.tracking_money_flow.user.domain.exception.InvalidDataException;
+
+import java.sql.Timestamp;
 import java.util.Random;
 
 public class PasswordRecovery {
     private String attachedId;
     private String requestBy;
-    private String isExpired;
-    private String requestedAt;
-    private String expiredAt;
+    private boolean isExpired;
+    private Timestamp requestedAt;
+    private Timestamp expiredAt;
 
 
-    private PasswordRecovery(String attachedId, String requestBy, String isExpired, String requestedAt, String expiredAt) {
+    private PasswordRecovery(String attachedId, String requestBy, boolean isExpired, Timestamp requestedAt, Timestamp expiredAt) {
         this.attachedId = attachedId;
         this.requestBy = requestBy;
         this.isExpired = isExpired;
@@ -18,17 +21,28 @@ public class PasswordRecovery {
         this.expiredAt = expiredAt;
     }
 
-    public static PasswordRecovery create(String requestBy, String isExpired, String requestedAt, String expiredAt) {
+    public static PasswordRecovery create(String requestBy, boolean isExpired, Timestamp requestedAt, Timestamp expiredAt) {
 
-        if(requestBy == null || requestBy.isEmpty()) {
-            throw new IllegalArgumentException("requestBy cannot be null or empty");
-        }else if(isExpired == null || isExpired.isEmpty()) {
-            throw new IllegalArgumentException("isExpired cannot be null or empty");
-        }else if(requestedAt == null || requestedAt.isEmpty()) {
-            throw new IllegalArgumentException("requestedAt cannot be null or empty");
+        if(requestBy.isEmpty()) {
+            throw new InvalidDataException("requestBy cannot be null or empty");
+        }else if(requestedAt == null) {
+            throw new InvalidDataException("requestedAt cannot be null or empty");
         }
 
         String attachedId = generateAttachedId();
+
+        return new PasswordRecovery(attachedId, requestBy, isExpired, requestedAt, expiredAt);
+    }
+
+    public static PasswordRecovery createWithAttachedId(String attachedId, String requestBy, boolean isExpired, Timestamp requestedAt, Timestamp expiredAt) {
+
+        if(attachedId.isEmpty()) {
+            throw new InvalidDataException("Attached id is not valid");
+        }else if(requestBy.isEmpty()) {
+            throw new InvalidDataException("requestBy cannot be null or empty");
+        }else if(requestedAt == null || expiredAt == null) {
+            throw new InvalidDataException("requestedAt or expireAt cannot be null or empty");
+        }
 
         return new PasswordRecovery(attachedId, requestBy, isExpired, requestedAt, expiredAt);
     }
@@ -60,27 +74,27 @@ public class PasswordRecovery {
         this.requestBy = requestBy;
     }
 
-    public String getIsExpired() {
+    public boolean getIsExpired() {
         return isExpired;
     }
 
-    public void setIsExpired(String isExpired) {
+    public void setIsExpired(boolean isExpired) {
         this.isExpired = isExpired;
     }
 
-    public String getRequestedAt() {
+    public Timestamp getRequestedAt() {
         return requestedAt;
     }
 
-    public void setRequestedAt(String requestedAt) {
+    public void setRequestedAt(Timestamp requestedAt) {
         this.requestedAt = requestedAt;
     }
 
-    public String getExpiredAt() {
+    public Timestamp getExpiredAt() {
         return expiredAt;
     }
 
-    public void setExpiredAt(String expiredAt) {
+    public void setExpiredAt(Timestamp expiredAt) {
         this.expiredAt = expiredAt;
     }
 }
