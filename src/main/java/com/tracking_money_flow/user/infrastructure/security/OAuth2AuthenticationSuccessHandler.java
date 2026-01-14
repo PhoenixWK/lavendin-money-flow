@@ -1,7 +1,7 @@
 package com.tracking_money_flow.user.infrastructure.security;
 
 import com.tracking_money_flow.user.application.command.GoogleLoginCommand;
-import com.tracking_money_flow.user.application.usecase.GoogleLoginUseCase;
+import com.tracking_money_flow.user.application.port.in.GoogleLoginUseCase;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,14 +1,11 @@
-package com.tracking_money_flow.user.application.usecase;
+package com.tracking_money_flow.user.application.port.in;
 
 import com.tracking_money_flow.user.application.command.RegisterUserCommand;
-import com.tracking_money_flow.user.application.port.PasswordHasher;
-import com.tracking_money_flow.user.application.port.UserRepository;
+import com.tracking_money_flow.user.application.port.out.PasswordHasher;
+import com.tracking_money_flow.user.application.port.out.UserRepository;
 import com.tracking_money_flow.user.domain.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 
 public class RegisterUserUseCase {

@@ -1,20 +1,14 @@
 package com.tracking_money_flow.user.infrastructure.api.controller;
 
-import com.tracking_money_flow.user.application.command.PasswordRecoveryRequestCommand;
+import com.tracking_money_flow.common.response.Response;
+import com.tracking_money_flow.user.application.command.*;
 import com.tracking_money_flow.user.application.service.AuthService;
-import com.tracking_money_flow.user.infrastructure.api.dto.GoogleUserInfo;
-import com.tracking_money_flow.user.infrastructure.api.dto.LoginRequest;
-import com.tracking_money_flow.user.infrastructure.api.dto.PasswordRecoveryRequest;
-import com.tracking_money_flow.user.infrastructure.api.dto.RegisterUserRequest;
-import com.tracking_money_flow.user.application.command.GoogleLoginCommand;
-import com.tracking_money_flow.user.application.command.LoginCommand;
-import com.tracking_money_flow.user.application.command.RegisterUserCommand;
+import com.tracking_money_flow.user.infrastructure.api.dto.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/users")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthController {
 
@@ -26,7 +20,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/register")
+    @PostMapping("/api/v1/auth/register")
     public ResponseEntity<Void> register(
             @RequestBody RegisterUserRequest request
     ) {
@@ -43,7 +37,7 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/v1/auth/login")
     public ResponseEntity<String> login(
             @RequestBody LoginRequest request
     ) {
@@ -52,7 +46,7 @@ public class AuthController {
         return ResponseEntity.ok(token);
     }
 
-    @PostMapping("/google/login")
+    @PostMapping("/api/v1/auth/google/login")
     public ResponseEntity<String> googleLogin(
             @RequestBody GoogleUserInfo googleUserInfo
     ) {
@@ -61,12 +55,44 @@ public class AuthController {
         return ResponseEntity.ok(token);
     }
 
-    @PostMapping("/me/password-recovery-request")
+    @PostMapping("/api/v1/auth/password-recovery-request")
     public ResponseEntity<?> recoverPasswordRequest(
             @RequestBody PasswordRecoveryRequest request
     ) {
         PasswordRecoveryRequestCommand cmd = new PasswordRecoveryRequestCommand(request.email());
         authService.passwordRecoveryRequest(cmd);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/api/v1/auth/me/password-recovery")
+    public ResponseEntity<Response<Object>> recoveryPassword(
+            @RequestBody PasswordRecovery passwordRecovery
+    ) {
+        PasswordRecoveryCommand cmd = new PasswordRecoveryCommand(passwordRecovery.attachedId(), passwordRecovery.newPassword());
+        authService.passwordRecovery(cmd);
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                Response.builder()
+                        .status(HttpStatus.OK.value())
+                        .message("Password is successfully recovered")
+                        .build()
+        );
+
+    }
+
+    @GetMapping("/api/v1/users/me")
+    public ResponseEntity<Response<Object>> getUserByEmail(
+            @RequestParam String email
+    ) {
+        var user = authService.getUserWithEmail(email);
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                Response.builder()
+                        .status(HttpStatus.OK.value())
+                        .message("User fetched successfully")
+                        .data(user)
+                        .build()
+        );
     }
 }

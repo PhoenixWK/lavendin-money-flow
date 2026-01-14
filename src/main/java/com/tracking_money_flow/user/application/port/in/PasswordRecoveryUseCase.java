@@ -1,9 +1,9 @@
-package com.tracking_money_flow.user.application.usecase;
+package com.tracking_money_flow.user.application.port.in;
 
 import com.tracking_money_flow.user.application.command.PasswordRecoveryCommand;
-import com.tracking_money_flow.user.application.port.PasswordHasher;
-import com.tracking_money_flow.user.application.port.PasswordRecoveryRepository;
-import com.tracking_money_flow.user.application.port.UserRepository;
+import com.tracking_money_flow.user.application.port.out.PasswordHasher;
+import com.tracking_money_flow.user.application.port.out.PasswordRecoveryRepository;
+import com.tracking_money_flow.user.application.port.out.UserRepository;
 import com.tracking_money_flow.user.domain.Email;
 import com.tracking_money_flow.user.domain.Password;
 import com.tracking_money_flow.user.domain.PasswordRecovery;

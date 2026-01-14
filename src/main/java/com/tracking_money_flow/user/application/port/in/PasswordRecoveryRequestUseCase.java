@@ -1,8 +1,8 @@
-package com.tracking_money_flow.user.application.usecase;
+package com.tracking_money_flow.user.application.port.in;
 
 import com.tracking_money_flow.user.application.command.PasswordRecoveryRequestCommand;
-import com.tracking_money_flow.user.application.port.EmailSending;
-import com.tracking_money_flow.user.application.port.PasswordRecoveryRepository;
+import com.tracking_money_flow.user.application.port.out.EmailSending;
+import com.tracking_money_flow.user.application.port.out.PasswordRecoveryRepository;
 import com.tracking_money_flow.user.domain.PasswordRecovery;
 
 import java.sql.Timestamp;

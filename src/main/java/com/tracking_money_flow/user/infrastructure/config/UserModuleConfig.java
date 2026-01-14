@@ -1,15 +1,12 @@
 package com.tracking_money_flow.user.infrastructure.config;
 
-import com.tracking_money_flow.user.application.port.*;
+import com.tracking_money_flow.user.application.port.in.*;
+import com.tracking_money_flow.user.application.port.out.*;
 import com.tracking_money_flow.user.application.service.AuthService;
-import com.tracking_money_flow.user.application.usecase.*;
 import com.tracking_money_flow.user.infrastructure.persistence.adapter.EmailSendingAdapter;
-import com.tracking_money_flow.user.infrastructure.persistence.adapter.JpaUserRepositoryAdapter;
+import com.tracking_money_flow.user.infrastructure.persistence.adapter.UserRepositoryAdapter;
 import com.tracking_money_flow.user.infrastructure.persistence.adapter.PasswordRecoveryRepositoryAdapter;
-import com.tracking_money_flow.user.infrastructure.persistence.repository.PasswordRecoveryJpaRepository;
 import com.tracking_money_flow.user.infrastructure.persistence.repository.UserJpaRepository;
-import com.tracking_money_flow.user.infrastructure.security.BCryptPasswordHasher;
-import com.tracking_money_flow.user.infrastructure.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,22 +17,12 @@ import org.thymeleaf.TemplateEngine;
 public class UserModuleConfig {
     @Bean
     UserRepository userRepository(UserJpaRepository jpa) {
-        return new JpaUserRepositoryAdapter(jpa);
+        return new UserRepositoryAdapter(jpa);
     }
 
     @Bean("passwordRecoveryRepository")
     PasswordRecoveryRepository passwordRecoveryRepository(PasswordRecoveryRepositoryAdapter adapter) {
         return adapter;
-    }
-
-    @Bean
-    PasswordHasher passwordHasher() {
-        return new BCryptPasswordHasher();
-    }
-
-    @Bean
-    TokenProvider tokenProvider() {
-        return new JwtTokenProvider();
     }
 
     @Bean
@@ -89,19 +76,28 @@ public class UserModuleConfig {
     }
 
     @Bean
+    GetUserWithEmailUseCase getUserWithEmailUseCase(
+            UserRepository userRepository
+    ) {
+        return new GetUserWithEmailUseCase(userRepository);
+    }
+
+    @Bean
     AuthService authService(
             LoginUserUseCase loginUserUseCase,
             RegisterUserUseCase registerUserUseCase,
             PasswordRecoveryRequestUseCase passwordRecoveryRequestUseCase,
             GoogleLoginUseCase googleLoginUseCase,
-            PasswordRecoveryUseCase passwordRecoveryUseCase
+            PasswordRecoveryUseCase passwordRecoveryUseCase,
+            GetUserWithEmailUseCase getUserWithEmailUseCase
     ) {
         return new AuthService(
                 loginUserUseCase,
                 registerUserUseCase,
                 passwordRecoveryRequestUseCase,
                 googleLoginUseCase,
-                passwordRecoveryUseCase
+                passwordRecoveryUseCase,
+                getUserWithEmailUseCase
         );
     }
 }

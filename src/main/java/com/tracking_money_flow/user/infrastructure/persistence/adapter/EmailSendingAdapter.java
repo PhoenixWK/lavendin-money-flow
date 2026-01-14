@@ -1,6 +1,6 @@
 package com.tracking_money_flow.user.infrastructure.persistence.adapter;
 
-import com.tracking_money_flow.user.application.port.EmailSending;
+import com.tracking_money_flow.user.application.port.out.EmailSending;
 import com.tracking_money_flow.user.domain.PasswordRecovery;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

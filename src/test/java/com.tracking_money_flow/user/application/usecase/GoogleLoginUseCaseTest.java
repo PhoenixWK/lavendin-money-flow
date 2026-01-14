@@ -1,8 +1,11 @@
 package com.tracking_money_flow.user.application.usecase;
 
+
+
 import com.tracking_money_flow.user.application.command.GoogleLoginCommand;
-import com.tracking_money_flow.user.application.port.TokenProvider;
-import com.tracking_money_flow.user.application.port.UserRepository;
+import com.tracking_money_flow.user.application.port.in.GoogleLoginUseCase;
+import com.tracking_money_flow.user.application.port.out.TokenProvider;
+import com.tracking_money_flow.user.application.port.out.UserRepository;
 import com.tracking_money_flow.user.domain.Email;
 import com.tracking_money_flow.user.domain.User;
 import org.junit.jupiter.api.BeforeEach;

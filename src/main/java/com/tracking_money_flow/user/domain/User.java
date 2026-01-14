@@ -1,6 +1,9 @@
 package com.tracking_money_flow.user.domain;
 
+import com.tracking_money_flow.role.domain.Role;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 public class User {
@@ -11,6 +14,7 @@ public class User {
     private Password password;
     private AuthProvider authProvider;
     private UserStatus status;
+    private List<Role> roles;
     private DateOfBirth dateOfBirth;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -100,6 +104,14 @@ public class User {
 
     public AuthProvider getAuthProvider() {
         return authProvider;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
 

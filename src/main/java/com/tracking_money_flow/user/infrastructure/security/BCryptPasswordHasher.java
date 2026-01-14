@@ -1,6 +1,6 @@
 package com.tracking_money_flow.user.infrastructure.security;
 
-import com.tracking_money_flow.user.application.port.PasswordHasher;
+import com.tracking_money_flow.user.application.port.out.PasswordHasher;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class BCryptPasswordHasher implements PasswordHasher {

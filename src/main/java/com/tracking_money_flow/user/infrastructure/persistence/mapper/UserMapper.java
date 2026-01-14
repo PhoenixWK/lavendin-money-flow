@@ -2,15 +2,15 @@ package com.tracking_money_flow.user.infrastructure.persistence.mapper;
 
 import com.tracking_money_flow.user.domain.*;
 
-import com.tracking_money_flow.user.infrastructure.persistence.jpa.UserJpaEntity;
+import com.tracking_money_flow.user.infrastructure.persistence.jpa.UserEntity;
 import com.tracking_money_flow.user.infrastructure.persistence.jpa.UserStatus;
 
 
 public class UserMapper {
 
 
-    public static UserJpaEntity toEntity(User user) {
-        UserJpaEntity entity = new UserJpaEntity();
+    public static UserEntity toEntity(User user) {
+        UserEntity entity = new UserEntity();
         // Don't set ID for new entities - let Hibernate generate it
         // Only set ID if it already exists in database
         if (!user.isNew()) {
@@ -40,7 +40,7 @@ public class UserMapper {
         };
     }
 
-    public static User toDomain(UserJpaEntity entity) {
+    public static User toDomain(UserEntity entity) {
         return User.reconstruct(
                 UserId.create(entity.getId()),
                 new Email(entity.getEmail()),

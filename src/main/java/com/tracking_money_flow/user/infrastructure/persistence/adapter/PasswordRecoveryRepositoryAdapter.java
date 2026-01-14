@@ -1,6 +1,6 @@
 package com.tracking_money_flow.user.infrastructure.persistence.adapter;
 
-import com.tracking_money_flow.user.application.port.PasswordRecoveryRepository;
+import com.tracking_money_flow.user.application.port.out.PasswordRecoveryRepository;
 import com.tracking_money_flow.user.domain.PasswordRecovery;
 import com.tracking_money_flow.user.domain.exception.InvalidPasswordRecoveryIdException;
 import com.tracking_money_flow.user.infrastructure.persistence.jpa.PasswordRecoveryJpaEntity;

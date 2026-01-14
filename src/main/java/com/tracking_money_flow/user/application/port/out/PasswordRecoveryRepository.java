@@ -1,6 +1,5 @@
-package com.tracking_money_flow.user.application.port;
+package com.tracking_money_flow.user.application.port.out;
 
-import com.tracking_money_flow.user.domain.Email;
 import com.tracking_money_flow.user.domain.PasswordRecovery;
 
 import java.util.Optional;

@@ -1,9 +1,9 @@
-package com.tracking_money_flow.user.application.usecase;
+package com.tracking_money_flow.user.application.port.in;
 
 import com.tracking_money_flow.user.application.command.LoginCommand;
-import com.tracking_money_flow.user.application.port.PasswordHasher;
-import com.tracking_money_flow.user.application.port.TokenProvider;
-import com.tracking_money_flow.user.application.port.UserRepository;
+import com.tracking_money_flow.user.application.port.out.PasswordHasher;
+import com.tracking_money_flow.user.application.port.out.TokenProvider;
+import com.tracking_money_flow.user.application.port.out.UserRepository;
 import com.tracking_money_flow.user.domain.*;
 
 public class LoginUserUseCase {

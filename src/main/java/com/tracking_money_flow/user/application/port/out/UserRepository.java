@@ -1,4 +1,4 @@
-package com.tracking_money_flow.user.application.port;
+package com.tracking_money_flow.user.application.port.out;
 
 import com.tracking_money_flow.user.domain.Email;
 import com.tracking_money_flow.user.domain.User;
@@ -18,5 +18,6 @@ public interface UserRepository {
 
     boolean existsByEmail(Email email);
 
+    Optional<User> findByUsername(String username);
 
 }
