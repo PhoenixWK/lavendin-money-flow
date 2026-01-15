@@ -7,11 +7,12 @@ import com.tracking_money_flow.user.application.port.out.UserRepository;
 import com.tracking_money_flow.user.infrastructure.persistence.jpa.UserEntity;
 import com.tracking_money_flow.user.infrastructure.persistence.repository.UserJpaRepository;
 import com.tracking_money_flow.user.infrastructure.persistence.mapper.UserMapper;
+import org.springframework.stereotype.Component;
 
 
 import java.util.Optional;
 
-
+@Component
 public class UserRepositoryAdapter implements UserRepository {
 
     private final UserJpaRepository userJpaRepository;

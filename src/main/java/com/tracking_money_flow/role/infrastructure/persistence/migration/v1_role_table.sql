@@ -1,4 +1,5 @@
-create table Role(
-    id int primary key,
+
+create table role(
+    id int primary key auto_increment,
     name varchar(255) unique
-)
+);

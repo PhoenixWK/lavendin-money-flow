@@ -13,7 +13,7 @@ public class RoleMapper {
             roleEntity.setId(roleEntity.getId());
         }
 
-        roleEntity.setName(roleEntity.getName());
+        roleEntity.setName(role.getName());
 
         return roleEntity;
     }

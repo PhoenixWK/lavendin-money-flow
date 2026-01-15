@@ -28,9 +28,9 @@ public class RoleRepositoryAdapter implements RoleRepository {
             throw new RoleAlreadyExistException("Role already exist");
         }
 
-        repo.save(RoleMapper.toEntity(newRole));
+        RoleEntity savedRole = repo.save(RoleMapper.toEntity(newRole));
 
-        return newRole;
+        return Role.reconstruct(savedRole.getId(), savedRole.getName());
     }
 
     @Override
@@ -42,7 +42,7 @@ public class RoleRepositoryAdapter implements RoleRepository {
 
         repo.save(role);
 
-        return newRole;
+        return Role.reconstruct(role.getId(), role.getName());
     }
 
     @Override

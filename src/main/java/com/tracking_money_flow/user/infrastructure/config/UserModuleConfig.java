@@ -7,6 +7,8 @@ import com.tracking_money_flow.user.infrastructure.persistence.adapter.EmailSend
 import com.tracking_money_flow.user.infrastructure.persistence.adapter.UserRepositoryAdapter;
 import com.tracking_money_flow.user.infrastructure.persistence.adapter.PasswordRecoveryRepositoryAdapter;
 import com.tracking_money_flow.user.infrastructure.persistence.repository.UserJpaRepository;
+import com.tracking_money_flow.user.infrastructure.security.BCryptPasswordHasher;
+import com.tracking_money_flow.user.infrastructure.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,48 +17,49 @@ import org.thymeleaf.TemplateEngine;
 
 @Configuration
 public class UserModuleConfig {
+
     @Bean
-    UserRepository userRepository(UserJpaRepository jpa) {
-        return new UserRepositoryAdapter(jpa);
+    PasswordHasher passwordHasher() {
+        return new BCryptPasswordHasher();
     }
 
-    @Bean("passwordRecoveryRepository")
-    PasswordRecoveryRepository passwordRecoveryRepository(PasswordRecoveryRepositoryAdapter adapter) {
-        return adapter;
+    @Bean
+    TokenProvider tokenProvider() {
+        return new JwtTokenProvider();
     }
 
     @Bean
     RegisterUserUseCase registerUserUseCase(
-            UserRepository repo,
+            UserRepositoryAdapter adapter,
             PasswordHasher hasher
     ) {
-        return new RegisterUserUseCase(repo, hasher);
+        return new RegisterUserUseCase(adapter, hasher);
     }
 
     @Bean
     LoginUserUseCase loginUserUseCase(
-            UserRepository repo,
+            UserRepositoryAdapter adapter,
             PasswordHasher hasher,
             TokenProvider token
     ) {
-        return new LoginUserUseCase(repo, hasher, token);
+        return new LoginUserUseCase(adapter, hasher, token);
     }
 
     @Bean
     GoogleLoginUseCase googleLoginUseCase(
-            UserRepository repo,
+            UserRepositoryAdapter adapter,
             TokenProvider token
     ) {
-        return new GoogleLoginUseCase(repo, token);
+        return new GoogleLoginUseCase(adapter, token);
     }
 
     @Bean
     PasswordRecoveryUseCase passwordRecoveryUseCase(
-            UserRepository userRepo,
+            UserRepositoryAdapter userRepositoryAdapter,
             PasswordHasher hasher,
-            @Qualifier("passwordRecoveryRepository") PasswordRecoveryRepository passwordRecoveryRepo
+            PasswordRecoveryRepositoryAdapter passwordRecoveryRepositoryAdapter
     ) {
-        return new PasswordRecoveryUseCase(hasher, userRepo, passwordRecoveryRepo);
+        return new PasswordRecoveryUseCase(hasher, userRepositoryAdapter, passwordRecoveryRepositoryAdapter);
     }
 
     @Bean
@@ -70,16 +73,16 @@ public class UserModuleConfig {
     @Bean
     PasswordRecoveryRequestUseCase passwordRecoveryRequestUseCase(
             EmailSending emailSending,
-            @Qualifier("passwordRecoveryRepository") PasswordRecoveryRepository repo
+            PasswordRecoveryRepositoryAdapter adapter
     ) {
-        return new PasswordRecoveryRequestUseCase(emailSending, repo);
+        return new PasswordRecoveryRequestUseCase(emailSending, adapter);
     }
 
     @Bean
     GetUserWithEmailUseCase getUserWithEmailUseCase(
-            UserRepository userRepository
+            UserRepositoryAdapter userRepositoryAdapter
     ) {
-        return new GetUserWithEmailUseCase(userRepository);
+        return new GetUserWithEmailUseCase(userRepositoryAdapter);
     }
 
     @Bean
